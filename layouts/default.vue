@@ -1,6 +1,5 @@
 <template>
-  <v-app dark style="background-color: #181a20; padding-bottom:5rem">
-
+  <v-app dark style="background-color: #181a20">
     <v-main>
       <v-container>
         <Nuxt />

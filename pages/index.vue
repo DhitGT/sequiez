@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="padding-bottom:5rem">
     <structure-app-header></structure-app-header>
     <collections-card-find-friend></collections-card-find-friend>
     <collections-quiz-collection :collectionName="'Discover'"></collections-quiz-collection>
