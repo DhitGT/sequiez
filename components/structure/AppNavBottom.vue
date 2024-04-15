@@ -1,7 +1,7 @@
 <template>
-  <div class="fixed bottom-0 left-0  w-full backdrop-blur-md rounded-[10rem]">
+  <div class="fixed bottom-0 left-0  w-full backdrop-blur-md rounded-t-[2rem]">
     <v-container>
-      <div class=" flex mb-5">
+      <div class=" flex mb-2">
         <div class="flex flex-col items-center w-0.5" v-for="(item, i) in items" :key="i">
           <v-icon>{{item.icon}}</v-icon>
           <label style="font-size:0.5em">{{item.title}}</label>
