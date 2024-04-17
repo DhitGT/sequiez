@@ -33,11 +33,12 @@
     <div class="userSnack">
       <div class="flex w-screen" style="max-width: 100%; cursor: pointer">
         <div class="w-12 rounded-full overflow-hidden">
-          <v-img src="https://placehold.co/300"></v-img>
+          <v-img v-if="user" lazy-src="https://placehold.co/200" :src="user.picture.large ? user.picture.large : 'https://placehold.co/200' "></v-img>
+
         </div>
-        <div class="flex flex-col justify-center px-3">
-          <span class="font-bold text-sm md:text-lg">brando hoshino</span>
-          <span class="text-xs md:text-md">@hsnbrnd</span>
+        <div class="flex flex-col justify-center px-3" v-if="user">
+          <span class="font-bold text-sm md:text-lg">{{user.name.first + ' ' + user.name.last}}</span>
+          <span class="text-xs md:text-md">@{{user.name.title + '' + user.name.last}}</span>
         </div>
         <div
           class="flex items-center justify-end rounded-lg selection:overflow-hidden"
@@ -76,7 +77,7 @@
         </div>
       </div>
       <v-divider></v-divider>
-      <div class="grid grid-cols-3 md:grid-cols-2 gap-4">
+      <div class="grid grid-cols-3  gap-4">
         <div class="moreInfo flex flex-col items-center my-3">
           <span class="total font-bold text-lg">23</span>
           <label class="label text-xs">Collections</label>
@@ -97,37 +98,55 @@
       <v-divider></v-divider>
     </div>
     <div class="moreAction my-4 flex gap-3 max-w-full items-center justify-evenly">
-      <v-btn color="#6949ff" class="py-2 grow px-4 rounded-xl" :small="isSmallScreen" style="text-transform:none">
+      <v-btn color="#6949ff" class="py-2 grow px-4 rounded-xl" :small="isSmallScreen" style="text-transform:none" :outlined="selectedAction != 'quiz'" @click="handleClickAction('quiz')">
         Quiez
       </v-btn>
-      <v-btn color="#6949ff" outlined class="py-2 grow px-4 rounded-xl" :small="isSmallScreen" style="text-transform:none">
+      <v-btn color="#6949ff" :outlined="selectedAction != 'collections'" class="py-2 grow px-4 rounded-xl" :small="isSmallScreen" style="text-transform:none" @click="handleClickAction('collections')">
         Collection
       </v-btn>
-      <v-btn color="#6949ff" outlined class="py-2 grow px-4 rounded-xl" :small="isSmallScreen" style="text-transform:none">
+      <v-btn color="#6949ff" :outlined="selectedAction != 'description'" class="py-2 grow px-4 rounded-xl" :small="isSmallScreen" style="text-transform:none" @click="handleClickAction('description')">
         About
       </v-btn>
     </div>
     <div class="moreActionSpace my-3">
-      <div class="topper justify-between flex items-center">
-        <label class="font-bold text-lg">10 Quiez</label>
-        <div class="flex justify-end items-center text-[#6949ff]">
-          <label class="text-lg">Newest</label>
-          <v-btn icon color="#6949ff">
-            <v-icon >mdi-swap-vertical</v-icon>
-          </v-btn>
-        </div>
-      </div>
+      <collections-user-quiz-collection v-if="selectedAction == 'quiz'"></collections-user-quiz-collection>
+      <collections-user-collection v-else-if="selectedAction == 'collections'"></collections-user-collection>
+      <collections-user-description v-else-if="selectedAction == 'description'"></collections-user-description>
     </div>
   </div>
 
 </template>
 <script>
 export default {
+  created(){
+    this.getUser()
+  },
   computed: {
     isSmallScreen() {
       // Adjust this breakpoint as per your requirement
       return window.innerWidth < 600; // Example: Apply x-small class when screen width is less than 600px
     },
   },
+  data(){
+    return{
+      selectedAction : 'quiz',
+      user : null
+    }
+  },
+  methods:{
+    handleClickAction(name) {
+      this.selectedAction = name
+    },
+    async getUser() {
+    try {
+        const res = await this.$axios.get('https://randomuser.me/api/');
+        this.user = res.data.results[0]; // Assuming you want the first result
+        console.log(this.user);
+    } catch (error) {
+        console.error('Error fetching user:', error);
+    }
+}
+
+  }
 };
 </script>
