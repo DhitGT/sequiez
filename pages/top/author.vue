@@ -65,7 +65,7 @@ export default {
           'name' : 'udin suzume',
           'username' : 'szme_din'
         },
-        
+      ]
     };
   },
   computed: {
