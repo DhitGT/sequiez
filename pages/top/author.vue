@@ -55,7 +55,13 @@ export default {
           'username' : 'szme_din',
           'followed' : true,
         },
-        
+        {
+          'image' : 'https://placehold.co/300',
+          'name' : 'udin suzume',
+          'username' : 'szme_din',
+          'followed' : true,
+        },
+
       ]
     };
   },
