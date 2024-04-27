@@ -52,9 +52,9 @@ export default {
 
         {
           'image' : 'https://placehold.co/300',
-          'name' : 'udin suzume',
+          'name' : 'udin 2 suzume',
           'username' : 'szme_din',
-          'followed' : false,
+          'followed' : true,
         },
 
 
