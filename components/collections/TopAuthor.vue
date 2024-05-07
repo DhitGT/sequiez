@@ -49,6 +49,14 @@ export default {
           'name' : 'Soenandar Soebarjo',
           'image' : 'https://i.pravatar.cc/150?img='
         },
+        {
+          'name' : 'Soenandar Soebarjo',
+          'image' : 'https://i.pravatar.cc/150?img='
+        },
+        {
+          'name' : 'Soenandar Soebarjo',
+          'image' : 'https://i.pravatar.cc/150?img='
+        },
       ]
     }
   }
